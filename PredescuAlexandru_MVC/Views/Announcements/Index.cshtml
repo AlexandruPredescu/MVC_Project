@@ -1,0 +1,78 @@
+﻿@model IEnumerable<PredescuAlexandru_MVC.Models.AnnouncementsModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Annoucements</h1>
+<p>
+    <a asp-action="Create" class="btn btn-primary btn-create">Create New</a>
+</p>
+<table class="table table-bordered table-hover">
+    <thead class="thead-light">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAnnouncement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValidFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValidTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tags)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdAnnouncement)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValidFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValidTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tags)
+                </td>
+                <td>
+                    @if (User.IsInRole("ADMIN"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.IdAnnouncement" class="btn btn-primary  btn-common">Edit</a>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.IdAnnouncement" class="btn btn-info  btn-common">Details</a>
+                    @if (User.IsInRole("ADMIN"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.IdAnnouncement" class="btn btn-danger  btn-common" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
