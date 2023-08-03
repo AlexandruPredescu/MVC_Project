@@ -71,6 +71,8 @@ namespace PredescuAlexandru_MVC.Controllers
         // GET: CodeSnippetsController/Edit/5
         public ActionResult Edit(Guid id)
         {
+            var members = _membersRepository.GetAllMembers();
+            ViewBag.Members = members;
             CodeSnippetModel codeSnippet = _repository.GetCodeSnippetById(id);
             _toastNotificatiopn.AddSuccessToastMessage("Editeaza un cod");
             return View(codeSnippet);

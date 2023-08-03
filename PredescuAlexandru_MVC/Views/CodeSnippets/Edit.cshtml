@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+@*<h1>Edit</h1>
 
 <h4>CodeSnippetModel</h4>
 <hr />
@@ -58,3 +58,73 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+*@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cvzGzDAxGEnmvgOO1U1dPJW1fs1" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="col-md-4">
+            <h1 class="text-center">Edit</h1>
+
+            <hr />
+
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdCodeSnippet" />
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContentCode" class="control-label"></label>
+                    <input asp-for="ContentCode" class="form-control" />
+                    <span asp-validation-for="ContentCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdMember" class="control-label"></label>
+                    @Html.DropDownList("IdMember", new SelectList(ViewBag.Members, "IdMember", "Name"))
+                    @*<input asp-for="IdMember" class="form-control" />
+                    <span asp-validation-for="IdMember" class="text-danger"></span>*@
+                </div>
+                <div class="form-group">
+                    <label asp-for="Revision" class="control-label"></label>
+                    <input asp-for="Revision" class="form-control" />
+                    <span asp-validation-for="Revision" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateTimeAdded" class="control-label"></label>
+                    <input asp-for="DateTimeAdded" class="form-control" />
+                    <span asp-validation-for="DateTimeAdded" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsPublished" /> @Html.DisplayNameFor(model => model.IsPublished)
+                    </label>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary btn-create" />
+                </div>
+                <div>
+                    <a asp-action="Index">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+qIoX3w10kWUkI5V7rt/LNvzoKbcjP5M3bA6E6J5QfUJsa9" crossorigin="anonymous"></script>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>
